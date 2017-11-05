@@ -13,8 +13,8 @@ dofile("timer.lua")
 tableOfWorkTime = TableOfWorkTime()
 timer           = Timer(tableOfWorkTime)
 
-local F = {}
-F.help = function ()
+local userCommand = {}
+userCommand.help = function ()
     printLine()
     io.write[[
 SCTR - Simple Console Time Registrator
@@ -28,27 +28,26 @@ SCTR - Simple Console Time Registrator
     printLine()
 end
 
-F.exit = function ()
-    F.stop()
-    F.time()
+
+userCommand.exit = function ()
+    timer.stop()
+    tableOfWorkTime.print()
     os.exit()
 end
 
-F.time = tableOfWorkTime.print
-F.start = timer.start
-F.stop  = timer.stop
 
+userCommand.time  = tableOfWorkTime.print
+userCommand.start = timer.start
+userCommand.stop  = timer.stop
 
 
 -- main
 repeat
     local string = io.read()
     local cmd, rest = string:match("(%a+) (.*)")
-    if not cmd then
-        cmd = string
-    end
+    cmd = cmd or string
 
-    if F[cmd] then
-        F[cmd](rest)
+    if userCommand[cmd] then
+        userCommand[cmd](rest)
     end
 until false
