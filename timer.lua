@@ -135,7 +135,7 @@ F.start = M.startOfTheTimer
 
 
 M.stopOfTheTimer = function ()
-    if st ~= "stop" then return end
+    if st == "stop" then return end
 
     st = "stop"
     local tmp_diff = os.time() - time
