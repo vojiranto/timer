@@ -8,13 +8,13 @@
 -------------------------------------------------------------------------------
 local debug = true
 
--- устанавливаем значение по умолчанию.
 function default(val, def)
     if val then
         return val
     else
         return def
 end end
+
 
 function File (string)
     local private = {}
@@ -87,7 +87,6 @@ end
 
 
 M.printTableOfTime = function ()
-    local now = os.time()
     local timeSum = 0
     M.printLine()
     for key, val in pairs(table) do
@@ -95,7 +94,7 @@ M.printTableOfTime = function ()
         timeSum = timeSum + val
     end
     print("time sum:  " .. M.round(timeSum/3600, 1000))
-    print("work time: " .. M.round(timeSum/(now - sTime)*100) .. "%")
+    print("work time: " .. M.round(timeSum/(os.time() - sTime)*100) .. "%")
     M.printLine()
 end
 F.time = M.printTableOfTime
