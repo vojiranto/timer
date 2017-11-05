@@ -1,7 +1,7 @@
 #!/usr/bin/luajit
 -------------------------------------------------------------------------------
 -- Название:    SCTR - Simple Console Time Registrator                       --
--- Версия:      0.0.3.11                                                     --
+-- Версия:      0.0.4.0                                                      --
 -- Автор:       Д.А. Павлюк                                                  --
 -- Лицензия:    GPL                                                          --
 -- Описание:    Программа для учёта рабочего времени.                        --
@@ -30,45 +30,42 @@ function File (string)
 end
 
 
-local table              = {}
-local timeOfProgramStart = os.time()
-local F                  = {}
-local M                  = {}
-
-M.round = function(n, i)
+round = function(n, i)
     if i then
-        return M.round(n*i)/i
+        return round(n*i)/i
     end
     return n - n%1
 end
 
-M.addZeroToNumber = function (n)
+addZeroToNumber = function (n)
     if #tostring(n) < 2 then return "0"..n end
     return ""..n
 end
 
 -- s => h:m:s
-M.toNormalTimeFormat = function (n)
-    local s = M.round(n%60)
-    local m = M.round(n/60%60)
-    local h = M.round(n/3600%24)
-    return h..":"..M.addZeroToNumber(m)..":"..M.addZeroToNumber(s)
+toNormalTimeFormat = function (n)
+    local s = round(n%60)
+    local m = round(n/60%60)
+    local h = round(n/3600%24)
+    return h..":"..addZeroToNumber(m)..":"..addZeroToNumber(s)
 end
 
 -- test s => h:m:s
-if debug and "1:01:05" ~= M.toNormalTimeFormat(3665) then 
-    print(" M.date(3665) = " .. M.toNormalTimeFormat(3665))
+if debug and "1:01:05" ~= toNormalTimeFormat(3665) then 
+    print(" M.date(3665) = " .. toNormalTimeFormat(3665))
 end
 
 
-M.printLine = function ()
+printLine = function ()
     io.write[[
 -------------------------------------------------------------------------------
 ]]
 end
 
+
+local F = {}
 F.help = function ()
-    M.printLine()
+    printLine()
     io.write[[
 SCTR - Simple Console Time Registrator
 Список поддерживаемых команд:
@@ -78,25 +75,42 @@ SCTR - Simple Console Time Registrator
     help       - вывести help
     exit       - выходим из программы
 ]]
-    M.printLine()
+    printLine()
 end
 
+function TableOfWorkTime ()
+    local private = {
+        timeOfProgramStart = os.time(),
+        table = {}
+    }
 
-M.printTableOfTime = function ()
-    local timeSum = 0
-    M.printLine()
-    for key, val in pairs(table) do
-        print(key .. ": " .. M.round(val/3600, 1000))
-        timeSum = timeSum + val
+    local public = {}
+    public.print = function ()
+        local timeSum = 0
+        printLine()
+        for key, val in pairs(private.table) do
+            print(key .. ": " .. round(val/3600, 1000))
+            timeSum = timeSum + val
+        end
+        print("time sum:  " .. round(timeSum/3600, 1000))
+        print("work time: " .. 
+            round(timeSum/(os.time() - private.timeOfProgramStart)*100) .. "%"
+        )
+        printLine()
     end
-    print("time sum:  " .. M.round(timeSum/3600, 1000))
-    print("work time: " .. 
-        M.round(timeSum/(os.time() - timeOfProgramStart)*100) .. "%"
-    )
-    M.printLine()
-end
-F.time = M.printTableOfTime
 
+    public.addIn = function(key, val)
+        if private.table[key] then
+            private.table[key] = private.table[key] + val
+        else
+            private.table[key] = val
+    end end
+
+    return public
+end
+
+tableOfWorkTime = TableOfWorkTime()
+F.time = tableOfWorkTime.print
 
 F.exit = function()
     F.stop()
@@ -105,19 +119,11 @@ F.exit = function()
 end
 
 
-M.printToConsoleAndInFile = function (string)
+printToConsoleAndInFile = function (string)
     local outString = os.date("%X") .. ": " .. string .. ".\n"
     io.write(outString) 
     File("work_log.md").write(outString)
 end
-
-
-M.addInTable = function(t, key, val)
-    if t[key] then
-        t[key] = t[key] + val
-    else
-        t[key] = val
-end end
 
 function Timer ()
     local private = {}
@@ -129,17 +135,16 @@ function Timer ()
             ticketName  = default(ticketName, "work"),
             state       = "start",
         }
-        M.printToConsoleAndInFile("start of " .. private.ticketName)
+        printToConsoleAndInFile("start of " .. private.ticketName)
     end
 
     public.stop = function ()
         if private.state ~= "start" then return end
         private.state = "stop"
         local tmp_diff = os.time() - private.timeOfStart
-        M.addInTable(table, private.ticketName, tmp_diff)
-        M.printToConsoleAndInFile(M.toNormalTimeFormat(tmp_diff))
+        tableOfWorkTime.addIn(private.ticketName, tmp_diff)
+        printToConsoleAndInFile(toNormalTimeFormat(tmp_diff))
     end
-
     return public
 end
 
