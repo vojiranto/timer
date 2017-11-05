@@ -82,10 +82,15 @@ if debug and "1:01:05" ~= M.date(3665) then
     print(" M.date(3665) = " .. M.date(3665))
 end
 
-
-F.help = function ()
+M.printLine = function ()
     io.write[[
 -------------------------------------------------------------------------------
+]]
+end
+
+F.help = function ()
+    M.printLine()
+    io.write[[
 SCTR - Simple Console Time Registrator
 Список поддерживаемых команд:
     start name - начать отсчёт времени для задания name
@@ -93,8 +98,8 @@ SCTR - Simple Console Time Registrator
     time       - вывести потраченное время
     help       - вывести help
     exit       - выходим из программы
--------------------------------------------------------------------------------
 ]]
+    M.printLine()
 end
 
 
@@ -102,18 +107,14 @@ end
 F.time = function ()
     local now = os.time()
     local timeSum = 0
-    io.write[[
--------------------------------------------------------------------------------
-]]
+    M.printLine()
     for key, val in pairs(table) do
-        io.write (key .. ": " .. M.round(val/3600, 1000) .."\n")
+        print(key .. ": " .. M.round(val/3600, 1000))
         timeSum = timeSum + val
     end
-    io.write("time sum: "  .. M.round(timeSum/3600, 1000) .. "\n")
-    io.write("work time: " .. M.round(timeSum/(now - sTime)*100) .. "%\n")
-    io.write[[
--------------------------------------------------------------------------------
-]]
+    print("time sum:  " .. M.round(timeSum/3600, 1000))
+    print("work time: " .. M.round(timeSum/(now - sTime)*100) .. "%")
+    M.printLine()
 end
 
 
@@ -124,11 +125,13 @@ F.exit = function()
     os.exit()
 end
 
+
 M.printToConsoleAndInFile = function (string)
     local outString = os.date("%X") .. ": " .. string .. ".\n"
     io.write(outString) 
     file.write(outString)
 end
+
 
 -- стартуем таймер
 F.start = function (rest)
