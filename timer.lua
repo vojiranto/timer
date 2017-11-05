@@ -1,7 +1,7 @@
 #!/usr/bin/luajit
 -------------------------------------------------------------------------------
 -- Название:    SCTR - Simple Console Time Registrator                       --
--- Версия:      0.0.3.6                                                      --
+-- Версия:      0.0.3.8                                                      --
 -- Автор:       Д.А. Павлюк                                                  --
 -- Лицензия:    GPL                                                          --
 -- Описание:    Программа для учёта рабочего времени.                        --
@@ -103,8 +103,7 @@ SCTR - Simple Console Time Registrator
 end
 
 
--- напечатать время
-F.time = function ()
+M.printTableOfTime = function ()
     local now = os.time()
     local timeSum = 0
     M.printLine()
@@ -116,9 +115,9 @@ F.time = function ()
     print("work time: " .. M.round(timeSum/(now - sTime)*100) .. "%")
     M.printLine()
 end
+F.time = M.printTableOfTime
 
 
--- выходим из программы
 F.exit = function()
     F.stop()
     F.time()
@@ -133,35 +132,34 @@ M.printToConsoleAndInFile = function (string)
 end
 
 
--- стартуем таймер
-F.start = function (rest)
-    if st == "start" then 
-        F.stop()
-    end
-    rest = default(rest, "work")
+M.addInTable = function(t, key, val)
+    if t[key] then
+        t[key] = t[key] + val
+    else
+        t[key] = val
+end end
+
+
+M.startOfTheTimer = function (rest)
+    if st == "start" then F.stop() end
 
     time   = os.time()
-    ticket = rest
+    ticket = default(rest, "work")
     st     = "start"
     
     M.printToConsoleAndInFile("start of ".. ticket)
 end
+F.start = M.startOfTheTimer
 
 
--- останавливаем таймер
-F.stop = function ()
+M.stopOfTheTimer = function ()
     if st == "start" then
         st = "stop"
-        -- время между стартом и завершением
         local tmp_diff = os.time() - time
-        if not table[ticket] then
-            table[ticket] = tmp_diff   
-        else
-            table[ticket] = table[ticket] + tmp_diff
-        end
-
+        M.addInTable(table, ticket, tmp_diff)
         M.printToConsoleAndInFile(M.date(tmp_diff))
 end end
+F.stop = M.stopOfTheTimer
 
 
 -- main
