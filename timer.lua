@@ -1,7 +1,7 @@
 #!/usr/bin/luajit
 -------------------------------------------------------------------------------
 -- Название:    SCTR - Simple Console Time Registrator                       --
--- Версия:      0.0.3.9                                                      --
+-- Версия:      0.0.3.10                                                     --
 -- Автор:       Д.А. Павлюк                                                  --
 -- Лицензия:    GPL                                                          --
 -- Описание:    Программа для учёта рабочего времени.                        --
@@ -34,7 +34,7 @@ local table  = {}                   -- таблица затраченного �
 local st     = "stop"               -- текущее состояние
 local ticket = ""                   -- текущая деятельность
 local sTime  = os.time()            -- время начала работы программы
-local time   = ""                   -- время начала работы над текущей задачей
+local time   = os.time()            -- время начала работы над текущей задачей
 local file   = File("work_log.md")  -- файл для записи лога
 local F      = {}                   -- функции доступные пользователю
 local M      = {}                   -- внутренние функции модуля
@@ -135,12 +135,13 @@ F.start = M.startOfTheTimer
 
 
 M.stopOfTheTimer = function ()
-    if st == "start" then
-        st = "stop"
-        local tmp_diff = os.time() - time
-        M.addInTable(table, ticket, tmp_diff)
-        M.printToConsoleAndInFile(M.toNormalTimeFormat(tmp_diff))
-end end
+    if st ~= "stop" then return end
+
+    st = "stop"
+    local tmp_diff = os.time() - time
+    M.addInTable(table, ticket, tmp_diff)
+    M.printToConsoleAndInFile(M.toNormalTimeFormat(tmp_diff))
+end 
 F.stop = M.stopOfTheTimer
 
 
