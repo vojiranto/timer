@@ -6,7 +6,7 @@
 -- Лицензия:    GPL                                                          --
 -- Описание:    Программа для учёта рабочего времени.                        --
 -------------------------------------------------------------------------------
-local debug = false
+local debug = true
 
 -- устанавливаем значение по умолчанию.
 function default(val, def)
@@ -62,12 +62,12 @@ M.round = function(n, i)
 end
 
 M.addZeroToNumber = function (n)
-    if #tostring(x) < 2 then return "0"..x end
-    return ""..x
+    if #tostring(n) < 2 then return "0"..n end
+    return ""..n
 end
 
 -- s => h:m:s
-M.date = function (n)
+M.toNormalTimeFormat = function (n)
     local s = M.round(n%60)
     local m = M.round(n/60%60)
     local h = M.round(n/3600%24)
@@ -75,8 +75,8 @@ M.date = function (n)
 end
 
 -- test s => h:m:s
-if debug and "1:01:05" ~= M.date(3665) then 
-    print(" M.date(3665) = " .. M.date(3665))
+if debug and "1:01:05" ~= M.toNormalTimeFormat(3665) then 
+    print(" M.date(3665) = " .. M.toNormalTimeFormat(3665))
 end
 
 
@@ -155,7 +155,7 @@ M.stopOfTheTimer = function ()
         st = "stop"
         local tmp_diff = os.time() - time
         M.addInTable(table, ticket, tmp_diff)
-        M.printToConsoleAndInFile(M.date(tmp_diff))
+        M.printToConsoleAndInFile(M.toNormalTimeFormat(tmp_diff))
 end end
 F.stop = M.stopOfTheTimer
 
