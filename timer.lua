@@ -44,6 +44,7 @@ function File (string)
     return public
 end
 
+
 local table  = {}                   -- таблица затраченного времени
 local st     = "stop"               -- текущее состояние
 local ticket = ""                   -- текущая деятельность
@@ -120,6 +121,11 @@ F.exit = function()
     os.exit()
 end
 
+M.print = function (string)
+    local outString = os.date("%X") .. ": " .. string .. ".\n"
+    io.write(outString) 
+    file.write(outString)
+end
 
 -- стартуем таймер
 F.start = function (rest)
@@ -131,12 +137,8 @@ F.start = function (rest)
     time   = os.time()
     ticket = rest
     st     = "start"
-        
-    -- выводим сообщение, чтобы продемонстрировать срабатывание ветки
-    -- а заодно дописываем тоже самое в лог
-    local outString = os.date("%X")..": start of "..ticket..".\n"
-    io.write(outString) 
-    file.write(outString)
+    
+    M.print("start of ".. ticket)
 end
 
 
@@ -150,13 +152,9 @@ F.stop = function ()
             table[ticket] = tmp_diff   
         else
             table[ticket] = table[ticket] + tmp_diff
-
         end
-        -- выводим сообщение, чтобы продемонстрировать срабатывание ветки
-        -- а заодно дописываем тоже самое в лог
-        local outString = os.date("%X")..": "..M.date(tmp_diff).."\n"
-        io.write(outString) 
-        file.write(outString)
+
+        M.print(M.date(tmp_diff))
 end end
 
 
