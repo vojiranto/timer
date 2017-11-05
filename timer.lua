@@ -1,7 +1,7 @@
 #!/usr/bin/luajit
 -------------------------------------------------------------------------------
 -- Название:    SCTR - Simple Console Time Registrator                       --
--- Версия:      0.0.3.8                                                      --
+-- Версия:      0.0.3.9                                                      --
 -- Автор:       Д.А. Павлюк                                                  --
 -- Лицензия:    GPL                                                          --
 -- Описание:    Программа для учёта рабочего времени.                        --
@@ -61,26 +61,24 @@ M.round = function(n, i)
     return n - n%1
 end
 
+M.addZeroToNumber = function (n)
+    if #tostring(x) < 2 then return "0"..x end
+    return ""..x
+end
 
 -- s => h:m:s
 M.date = function (n)
     local s = M.round(n%60)
     local m = M.round(n/60%60)
     local h = M.round(n/3600%24)
-    local f = function (x)
-        if #tostring(x) < 2 then
-            return "0"..x
-        end
-        return ""..x
-    end
-    return h..":"..f(m)..":"..f(s)
+    return h..":"..M.addZeroToNumber(m)..":"..M.addZeroToNumber(s)
 end
-
 
 -- test s => h:m:s
 if debug and "1:01:05" ~= M.date(3665) then 
     print(" M.date(3665) = " .. M.date(3665))
 end
+
 
 M.printLine = function ()
     io.write[[
