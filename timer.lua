@@ -53,13 +53,12 @@ local file   = File("work_log.md")  -- файл для записи лога
 local F      = {}                   -- функции доступные пользователю
 local M      = {}                   -- внутренние функции модуля
 
--- округление вниз
 M.round = function(n)
     return n - n%1
 end
 
 
--- переводим секунды в обычную систему с часами и минутами
+-- s => h:m:s
 M.date = function (n)
     local s = M.round(n%60)
     local m = M.round(n/60%60)
@@ -74,20 +73,12 @@ M.date = function (n)
 end
 
 
--- тест на корректное преобразования секунд в часы:минуты:секунды.
-if debug then
-    print(
-        tostring("0:01:05" == M.date(65))
-        .. " M.date(65)   = " .. M.date(65)
-    )
-    print(
-        tostring("1:01:05" == M.date(3665)) 
-        .. " M.date(3665) = " .. M.date(3665)
-    )
+-- test s => h:m:s
+if debug and "1:01:05" ~= M.date(3665) then 
+    print(" M.date(3665) = " .. M.date(3665))
 end
 
 
--- вывести хелп
 F.help = function ()
     io.write[[
 -------------------------------------------------------------------------------
