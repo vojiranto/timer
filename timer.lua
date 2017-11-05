@@ -5,7 +5,7 @@ function Timer (tableOfWorkTime)
         public.stop()
         private = {
             timeOfStart = os.time(),
-            ticketName  = default(ticketName, "work"),
+            ticketName  = ticketName or "work",
             state       = "start",
         }
         printToConsoleAndInFile("start of " .. private.ticketName)

@@ -1,11 +1,3 @@
-function default(val, def)
-    if val then
-        return val
-    else
-        return def
-end end
-
-
 function round (n, i)
     if i then
         return round(n*i)/i

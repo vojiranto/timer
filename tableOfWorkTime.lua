@@ -19,12 +19,9 @@ function TableOfWorkTime ()
         printLine()
     end
 
-    public.addIn = function(key, val)
-        if private.table[key] then
-            private.table[key] = private.table[key] + val
-        else
-            private.table[key] = val
-    end end
+    public.addIn = function (key, val)
+        private.table[key] = private.table[key] or 0 + val
+    end
 
     return public
 end

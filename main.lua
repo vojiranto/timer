@@ -11,7 +11,7 @@ dofile("tableOfWorkTime.lua")
 dofile("timer.lua")
 
 tableOfWorkTime = TableOfWorkTime()
-timer = Timer(tableOfWorkTime)
+timer           = Timer(tableOfWorkTime)
 
 local F = {}
 F.help = function ()
@@ -28,14 +28,17 @@ SCTR - Simple Console Time Registrator
     printLine()
 end
 
-F.time = tableOfWorkTime.print
-F.start = timer.start
-F.stop  = timer.stop
-F.exit = function()
+F.exit = function ()
     F.stop()
     F.time()
     os.exit()
 end
+
+F.time = tableOfWorkTime.print
+F.start = timer.start
+F.stop  = timer.stop
+
+
 
 -- main
 repeat
