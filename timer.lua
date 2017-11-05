@@ -1,7 +1,7 @@
 #!/usr/bin/luajit
 -------------------------------------------------------------------------------
 -- Название:    SCTR - Simple Console Time Registrator                       --
--- Версия:      0.0.3.10                                                     --
+-- Версия:      0.0.3.11                                                     --
 -- Автор:       Д.А. Павлюк                                                  --
 -- Лицензия:    GPL                                                          --
 -- Описание:    Программа для учёта рабочего времени.                        --
@@ -30,14 +30,10 @@ function File (string)
 end
 
 
-local table  = {}                   -- таблица затраченного времени
-local st     = "stop"               -- текущее состояние
-local ticket = ""                   -- текущая деятельность
-local sTime  = os.time()            -- время начала работы программы
-local time   = os.time()            -- время начала работы над текущей задачей
-local file   = File("work_log.md")  -- файл для записи лога
-local F      = {}                   -- функции доступные пользователю
-local M      = {}                   -- внутренние функции модуля
+local table              = {}
+local timeOfProgramStart = os.time()
+local F                  = {}
+local M                  = {}
 
 M.round = function(n, i)
     if i then
@@ -94,7 +90,9 @@ M.printTableOfTime = function ()
         timeSum = timeSum + val
     end
     print("time sum:  " .. M.round(timeSum/3600, 1000))
-    print("work time: " .. M.round(timeSum/(os.time() - sTime)*100) .. "%")
+    print("work time: " .. 
+        M.round(timeSum/(os.time() - timeOfProgramStart)*100) .. "%"
+    )
     M.printLine()
 end
 F.time = M.printTableOfTime
@@ -110,7 +108,7 @@ end
 M.printToConsoleAndInFile = function (string)
     local outString = os.date("%X") .. ": " .. string .. ".\n"
     io.write(outString) 
-    file.write(outString)
+    File("work_log.md").write(outString)
 end
 
 
@@ -121,29 +119,33 @@ M.addInTable = function(t, key, val)
         t[key] = val
 end end
 
+function Timer ()
+    local private = {}
+    local public  = {}
+    public.start = function (ticketName)
+        public.stop()
+        private = {
+            timeOfStart = os.time(),
+            ticketName  = default(ticketName, "work"),
+            state       = "start",
+        }
+        M.printToConsoleAndInFile("start of " .. private.ticketName)
+    end
 
-M.startOfTheTimer = function (rest)
-    if st == "start" then F.stop() end
+    public.stop = function ()
+        if private.state ~= "start" then return end
+        private.state = "stop"
+        local tmp_diff = os.time() - private.timeOfStart
+        M.addInTable(table, private.ticketName, tmp_diff)
+        M.printToConsoleAndInFile(M.toNormalTimeFormat(tmp_diff))
+    end
 
-    time   = os.time()
-    ticket = default(rest, "work")
-    st     = "start"
-    
-    M.printToConsoleAndInFile("start of ".. ticket)
+    return public
 end
-F.start = M.startOfTheTimer
 
-
-M.stopOfTheTimer = function ()
-    if st == "stop" then return end
-
-    st = "stop"
-    local tmp_diff = os.time() - time
-    M.addInTable(table, ticket, tmp_diff)
-    M.printToConsoleAndInFile(M.toNormalTimeFormat(tmp_diff))
-end 
-F.stop = M.stopOfTheTimer
-
+local timer = Timer()
+F.start = timer.start
+F.stop  = timer.stop
 
 -- main
 repeat
