@@ -121,7 +121,7 @@ F.exit = function()
     os.exit()
 end
 
-M.print = function (string)
+M.printToConsoleAndInFile = function (string)
     local outString = os.date("%X") .. ": " .. string .. ".\n"
     io.write(outString) 
     file.write(outString)
@@ -138,7 +138,7 @@ F.start = function (rest)
     ticket = rest
     st     = "start"
     
-    M.print("start of ".. ticket)
+    M.printToConsoleAndInFile("start of ".. ticket)
 end
 
 
@@ -154,7 +154,7 @@ F.stop = function ()
             table[ticket] = table[ticket] + tmp_diff
         end
 
-        M.print(M.date(tmp_diff))
+        M.printToConsoleAndInFile(M.date(tmp_diff))
 end end
 
 
