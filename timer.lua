@@ -16,30 +16,15 @@ function default(val, def)
         return def
 end end
 
--- объект файл
 function File (string)
     local private = {}
     private.string = string
 
     local public = {}
-    -- запись в файл
     public.write = function (str, r)
-        local r    = default(r, "a")    
-        local file = io.open(private.string, r)
+        local file = io.open(private.string, default(r, "a"))
         file:write(str)
         file:close()
-    end
-
-    -- чтение из файла
-    -- считывает всё содержимое файла или возвращает false
-    public.read = function ()
-        local file = io.open(private.string, "rb") 
-        if file then
-            local string = file:read("*all")
-            file:close()
-            return string
-        end
-        return false
     end
     return public
 end
