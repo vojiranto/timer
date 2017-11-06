@@ -19,8 +19,7 @@ function TableOfWorkTime ()
             local data                 = dofile(private.fileName)
             private.table              = data.table
             private.timeOfProgramStart = data.timeOfProgramStart
-        end
-    end
+    end end
 
     private.writeInFile = function ()
         local file = io.open(private.fileName, "w")
@@ -52,8 +51,7 @@ function TableOfWorkTime ()
     private.printTableBody = function ()
         for key, val in pairs(private.table) do
             print(key .. ": " .. round(val/3600, 1000))
-        end
-    end 
+    end end 
 
     private.printTableBottom = function ()
         local timeSum     = private.timeSum()
