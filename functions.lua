@@ -1,3 +1,10 @@
+function round (n, i)
+    if i then
+        return round(n*i)/i
+    else
+        return n - n%1
+end end
+
 local space = function(n)
     local space = ""
     for i = 1, n do
@@ -7,15 +14,7 @@ local space = function(n)
 end
 
 
-function round (n, i)
-    if i then
-        return round(n*i)/i
-    else
-        return n - n%1
-end end
-
-
-function sum (table)
+local sum = function (table)
     local result = 0
     for _, val in pairs(table) do
         result = result + val
@@ -24,7 +23,7 @@ function sum (table)
 end
 
 
-function tableToString (myTable, n)
+local tableToString = function (myTable, n)
     local m = n or 1
     local tmpTable = {}
     for k, v in pairs(myTable) do

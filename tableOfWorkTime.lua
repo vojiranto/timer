@@ -5,6 +5,36 @@ local printLine = function ()
 end
 
 
+local space = function(n)
+    local space = ""
+    for i = 1, n do
+        space = "\t" .. space
+    end
+    return space
+end
+
+
+local sum = function (table)
+    local result = 0
+    for _, val in pairs(table) do
+        result = result + val
+    end
+    return result
+end
+
+
+local tableToString = function (myTable, n)
+    local m = n or 1
+    local tmpTable = {}
+    for k, v in pairs(myTable) do
+        tmpTable[#tmpTable + 1] = k.." = "..v
+    end
+    return "{\n" ..
+        space(m) .. table.concat(tmpTable, ",\n" .. space(m)) .. "\n" .. 
+        space(m - 1) .. "}"
+end
+
+
 function TableOfWorkTime ()
     local private = {
         fileName           = "tables/".. os.date("%Y.%m.%d")..".lua",
