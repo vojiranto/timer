@@ -5,6 +5,15 @@ local printLine = function ()
 end
 
 
+local sum = function (table)
+    local result = 0
+    for _, val in pairs(table) do
+        result = result + val
+    end
+    return result
+end
+
+
 function TableOfWorkTime ()
     local private = {
         fileName           = "tables/".. os.date("%Y.%m.%d")..".lua",
@@ -40,21 +49,13 @@ function TableOfWorkTime ()
         file:close()
     end
 
-    private.timeSum = function ()
-        local sum = 0
-        for _, val in pairs(private.table) do
-            sum = sum + val
-        end
-        return sum
-    end
-
     private.printTableBody = function ()
         for key, val in pairs(private.table) do
             print(key .. ": " .. round(val/3600, 1000))
     end end 
 
     private.printTableBottom = function ()
-        local timeSum     = private.timeSum()
+        local timeSum     = sum(private.table)
         local workProcent = timeSum/(os.time() - private.timeOfProgramStart)*100
         io.write(
             localization.timeSum     .. round(timeSum/3600, 1000) ..  "\n" ..
