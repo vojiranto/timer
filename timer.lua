@@ -1,12 +1,4 @@
-function round (n, i)
-    if i then
-        return round(n*i)/i
-    else
-        return n - n%1
-end end
-
-
-function addZeroToNumber (n)
+local addZeroToNumber = function (n)
     if #tostring(n) < 2 then 
         return "0"..n
     else
@@ -15,7 +7,7 @@ end end
 
 
 -- s => h:m:s
-function toNormalTimeFormat (n)
+local toNormalTimeFormat = function  (n)
     local s = round(n%60)
     local m = round(n/60%60)
     local h = round(n/3600%24)
@@ -23,7 +15,7 @@ function toNormalTimeFormat (n)
 end
 
 
-function printToConsoleAndInFile (string)
+local printToConsoleAndInFile = function (string)
     local outString = os.date("%X") .. ": " .. string .. ".\n"
     
     io.write(outString) 

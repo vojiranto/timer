@@ -1,4 +1,4 @@
-function printLine ()
+local printLine = function ()
     io.write[[
 -------------------------------------------------------------------------------
 ]]
