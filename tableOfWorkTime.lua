@@ -1,3 +1,9 @@
+function printLine ()
+    io.write[[
+-------------------------------------------------------------------------------
+]]
+end
+
 function TableOfWorkTime ()
     local private = {
         timeOfProgramStart = os.time(),
