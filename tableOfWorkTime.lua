@@ -5,15 +5,6 @@ local printLine = function ()
 end
 
 
-local sum = function (table)
-    local result = 0
-    for _, val in pairs(table) do
-        result = result + val
-    end
-    return result
-end
-
-
 function TableOfWorkTime ()
     local private = {
         fileName           = "tables/".. os.date("%Y.%m.%d")..".lua",
