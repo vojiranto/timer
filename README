@@ -1,14 +1,9 @@
 SCTR - Simple Console Time Registrator
 
 Список поддерживаемых команд:
-
     1. start name - начать отсчёт времени для задания name
-
     2. stop       - закончить отсчёт
-
     3. work time  - вывести потраченное время
-
     4. help       - вывести help
-
     5. exit       - выходим из программы
 
