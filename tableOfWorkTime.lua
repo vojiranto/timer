@@ -46,8 +46,8 @@ function TableOfWorkTime ()
             print(key .. ": " .. round(val/3600, 1000))
             timeSum = timeSum + val
         end
-        print("time sum:  " .. round(timeSum/3600, 1000))
-        print("work time: " .. 
+        print(localization.time_sum     .. round(timeSum/3600, 1000))
+        print(localization.work_procent .. 
             round(timeSum/(os.time() - private.timeOfProgramStart)*100) .. "%"
         )
         printLine()
