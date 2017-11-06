@@ -5,27 +5,6 @@ local printLine = function ()
 end
 
 
-local space = function(n)
-    local space = ""
-    for i = 1, n do
-        space = "\t" .. space
-    end
-    return space
-end
-
-
-local tableToString = function (myTable, n)
-    local m = n or 1
-    local tmpTable = {}
-    for k, v in pairs(myTable) do
-        tmpTable[#tmpTable + 1] = k.." = "..v
-    end
-    return "{\n" ..
-        space(m) .. table.concat(tmpTable, ",\n" .. space(m)) .. "\n" .. 
-        space(m - 1) .. "}"
-end
-
-
 function TableOfWorkTime ()
     local private = {
         fileName           = "tables/".. os.date("%Y.%m.%d")..".lua",
@@ -42,13 +21,12 @@ function TableOfWorkTime ()
             private.timeOfProgramStart = data.timeOfProgramStart
     end end
 
-
     private.writeInFile = function ()
         local file = io.open(private.fileName, "w")
         file:write(
             "return {\n" ..
             "\ttimeOfProgramStart = " .. private.timeOfProgramStart .. ",\n"..
-            "\ttable = " .. tableToString(private.table, 2) .. "\n" .. 
+            "\ttable = " .. tableToString(private.table, 2)         .. "\n" .. 
             "}"
         )
         file:close()
