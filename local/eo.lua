@@ -10,7 +10,7 @@ Listo de la subtenataj komandoj:
     exit       - eliri el la programo.
 -------------------------------------------------------------------------------
 ]],
-    time_sum     = "tuta tempo           ",
-    work_procent = "labortempa procento: ",
-    start_of     = "starto de tasko "
+    timeSum     = "tuta tempo           ",
+    workProcent = "labortempa procento: ",
+    startOf     = "starto de tasko "
 }

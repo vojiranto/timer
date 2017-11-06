@@ -37,7 +37,7 @@ function Timer (tableOfWorkTime)
             ticketName  = ticketName or "work",
             state       = "started",
         }
-        printToConsoleAndInFile(localization.start_of .. private.ticketName)
+        printToConsoleAndInFile(localization.startOf .. private.ticketName)
     end
 
     public.stop = function ()

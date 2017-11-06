@@ -10,7 +10,7 @@ List of supported commands:
     exit       - exit from the program.
 -------------------------------------------------------------------------------
 ]],
-    time_sum     = "time sum         : ",
-    work_procent = "work time procent: ",
-    start_of     = "start of "
+    timeSum     = "time sum         : ",
+    workProcent = "work time procent: ",
+    startOf     = "start of "
 }
