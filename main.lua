@@ -11,7 +11,7 @@ dofile("tableOfWorkTime.lua")
 dofile("timer.lua")
 
 
-function help ()
+local help = function ()
     io.write[[
 -------------------------------------------------------------------------------
 SCTR - Simple Console Time Registrator
@@ -26,18 +26,18 @@ SCTR - Simple Console Time Registrator
 end
 
 
-tableOfWorkTime = TableOfWorkTime()
-timer           = Timer(tableOfWorkTime)
+local tableOfWorkTime = TableOfWorkTime()
+local timer           = Timer(tableOfWorkTime)
 
 
-function exit ()
+local exit = function ()
     timer.stop()
     tableOfWorkTime.print()
     os.exit()
 end
 
 
-userCommand = {
+local userCommand = {
     help  = help,
     exit  = exit,
     work  = tableOfWorkTime.print,
