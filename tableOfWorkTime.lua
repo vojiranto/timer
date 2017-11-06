@@ -38,6 +38,7 @@ function TableOfWorkTime ()
     end
 
     local public = {}
+
     public.print = function ()
         local timeSum = 0
         printLine()
@@ -58,5 +59,6 @@ function TableOfWorkTime ()
     end
 
     private.load()
+
     return public
 end
