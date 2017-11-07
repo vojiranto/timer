@@ -11,12 +11,14 @@ setLocalization = function (code)
         setLocalization("en")
 end end
 
+initLocal = function ()
+    local iniFile = io.open("settings/lang.ini", "r")
+    if iniFile then
+        local code = iniFile:read()
+        setLocalization(code)
+        iniFile:close()
+    else
+        setLocalization("en")
+end end
 
-local iniFile = io.open("settings/lang.ini", "r")
-if iniFile then
-    local code = iniFile:read()
-    setLocalization(code)
-    iniFile:close()
-else
-    setLocalization("en")
-end
+initLocal()
