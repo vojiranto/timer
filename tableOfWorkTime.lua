@@ -37,18 +37,20 @@ end
 
 function TableOfWorkTime ()
     local private = {
-        fileName           = "tables/".. os.date("%Y.%m.%d")..".lua",
-        timeOfProgramStart = os.time(),
-        table              = {}
+        fileName             = "tables/".. os.date("%Y.%m.%d")..".lua",
+        timeOfProgramStart   = os.time(),
+        timeOfProgramStoping = os.time(),
+        table                = {}
     }
 
     private.load = function ()
         local file = io.open(private.fileName, "r")
         if file then
             io.close(file)
-            local data                 = dofile(private.fileName)
-            private.table              = data.table
-            private.timeOfProgramStart = data.timeOfProgramStart
+            local data                   = dofile(private.fileName)
+            private.table                = data.table
+            private.timeOfProgramStart   = data.timeOfProgramStart
+            private.timeOfProgramStoping = data.timeOfProgramStoping
     end end
 
     private.printTableBody = function ()
@@ -56,9 +58,18 @@ function TableOfWorkTime ()
             print(key .. ": " .. round(val/3600, 1000))
     end end 
 
+    private.setTimeOfProgramStoping = function ()
+        private.timeOfProgramStoping = os.time() 
+    end
+
+    private.programWorkTime = function ()
+        private.setTimeOfProgramStoping()
+        return private.timeOfProgramStoping - private.timeOfProgramStart
+    end
+
     private.printTableBottom = function ()
-        local timeSum     = sum(private.table)
-        local workProcent = timeSum/(os.time() - private.timeOfProgramStart)*100
+        local timeSum         = sum(private.table)
+        local workProcent     = timeSum/private.programWorkTime() * 100
         io.write(
             localization.timeSum     .. round(timeSum/3600, 1000) ..  "\n" ..
             localization.workProcent .. round(workProcent,  10)   .. "%\n"
@@ -77,10 +88,12 @@ function TableOfWorkTime ()
 
     public.addIn = function (key, val)
         private.table[key] = (private.table[key] or 0) + val
+        private.setTimeOfProgramStoping()
         writeFile(private.fileName,
             "return {\n" ..
-            "\ttimeOfProgramStart = " .. private.timeOfProgramStart .. ",\n"..
-            "\ttable = " .. tableToString(private.table, 2)         .. "\n" .. 
+            "\ttimeOfProgramStart   = " .. private.timeOfProgramStart   .. ",\n" ..
+            "\ttimeOfProgramStoping = " .. private.timeOfProgramStoping .. ",\n" ..
+            "\ttable = " .. tableToString(private.table, 2)             .. "\n"  .. 
             "}"
         )
     end
@@ -89,3 +102,10 @@ function TableOfWorkTime ()
 
     return public
 end
+
+
+function ActiveTableOfWorkTime()
+    local public = TableOfWorkTime ()
+    return public
+end
+

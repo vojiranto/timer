@@ -1,7 +1,7 @@
 #!/usr/bin/luajit
 -------------------------------------------------------------------------------
 -- Name:        SCTR - Simple Console Time Registrator                       --
--- Version:     0.1.5.1                                                      --
+-- Version:     0.2.0.1                                                      --
 -- Author:      D.A. Pavlyuk                                                 --
 -- License:     GPL                                                          --
 -- Description: The program for the account of working hours.                --
@@ -15,7 +15,7 @@ local help = function ()
     io.write(localization.help)
 end
 
-local tableOfWorkTime = TableOfWorkTime()
+local tableOfWorkTime = ActiveTableOfWorkTime()
 local timer           = Timer(tableOfWorkTime)
 
 
