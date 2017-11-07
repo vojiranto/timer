@@ -44,9 +44,7 @@ function TableOfWorkTime ()
     local public = {}
 
     public.load = function (fileName)
-        local file = io.open(fileName, "r")
-        if file then
-            io.close(file)
+        if fileExist(fileName) then
             local data                   = dofile(fileName)
             private.table                = data.table
             private.timeOfProgramStart   = data.timeOfProgramStart

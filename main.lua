@@ -29,9 +29,7 @@ end
 
 local showTable = function (tableName) 
     local fileName = "tables/".. tableName ..".lua"
-    local file = io.open(fileName, "r")
-    if file then
-        file:close()
+    if fileExist(fileName) then
         local table = TableOfWorkTime()
         table.load(fileName) 
         table.print()
