@@ -6,7 +6,8 @@
 -- License:     GPL                                                          --
 -- Description: The program for the account of working hours.                --
 -------------------------------------------------------------------------------
-localization = dofile("local/en.lua")
+
+dofile("localization.lua")
 dofile("functions.lua")
 dofile("tableOfWorkTime.lua")
 dofile("timer.lua")
@@ -26,17 +27,6 @@ local exit = function ()
     tableOfWorkTime.print()
     os.exit()
 end
-
-
-local setLocalization = function (code)
-    local localizationTable = {
-        ru = "local/ru.lua",
-        en = "local/en.lua",
-        eo = "local/eo.lua"
-    }
-    if localizationTable[code] then
-        localization = dofile(localizationTable[code])
-end end
 
 
 local userCommand = {
