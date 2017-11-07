@@ -31,6 +31,7 @@ local userCommand = {
     help      = help,
     exit      = exit,
     ["local"] = setLocalization,
+    show      = showTable
     work      = tableOfWorkTime.print,
     start     = timer.start,
     stop      = timer.stop,

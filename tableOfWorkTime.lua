@@ -100,3 +100,8 @@ function TableOfWorkTime ()
     return public
 end
 
+function showTable (tableName) 
+    local table = TableOfWorkTime()
+    table.load("tables/".. tableName..".lua") 
+    table.print()
+end
