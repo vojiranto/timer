@@ -11,7 +11,8 @@ Listo de la subtenataj komandoj:
     exit       - eliri el la programo.
 -------------------------------------------------------------------------------
 ]],
-    timeSum     = "tuta tempo:          ",
-    workProcent = "labortempa procento: ",
-    startOf     = "starto de tasko "
+    timeSum       = "tuta tempo:          ",
+    workProcent   = "labortempa procento: ",
+    startOf       = "starto de tasko "
+    tableNotExist = "La tablo ne ekzistas.",
 }

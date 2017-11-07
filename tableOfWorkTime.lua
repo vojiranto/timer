@@ -101,7 +101,13 @@ function TableOfWorkTime ()
 end
 
 function showTable (tableName) 
-    local table = TableOfWorkTime()
-    table.load("tables/".. tableName..".lua") 
-    table.print()
-end
+    local table    = TableOfWorkTime()
+    local fileName = "tables/".. tableName ..".lua"
+    local file = io.open(fileName, "r")
+    if file then
+        file:close()
+        table.load(fileName) 
+        table.print()
+    else
+        print(localization.tableNotExist)
+end end

@@ -11,7 +11,8 @@ List of supported commands:
     exit       - exit from the program.
 -------------------------------------------------------------------------------
 ]],
-    timeSum     = "time sum:          ",
-    workProcent = "work time procent: ",
-    startOf     = "start of "
+    timeSum       = "time sum:          ",
+    workProcent   = "work time procent: ",
+    startOf       = "start of ",
+    tableNotExist = "The table does not exist.",
 }
