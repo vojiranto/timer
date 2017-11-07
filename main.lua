@@ -9,6 +9,7 @@
 dofile("functions.lua")
 dofile("localization.lua")
 dofile("tableOfWorkTime.lua")
+dofile("activeTableOfWorkTime.lua")
 dofile("timer.lua")
 
 local help = function ()

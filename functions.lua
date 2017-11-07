@@ -5,6 +5,14 @@ function round (n, i)
         return n - n%1
 end end
 
+function copy (t)
+    local result = {}
+    for k, v in pairs(t) do
+        result[k] = v
+    end
+    return result
+end
+
 
 function writeFile (fileName, string, r)
     local file = io.open(fileName, r or "w")
