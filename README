@@ -5,4 +5,5 @@ List of supported commands:
     2. stop       - finish off the task;
     3. work time  - show table of used time;
     4. help       - show help;
-    5. exit       - exit from the program.
+    5. local en   - change the language (en/eo/ru);
+    6. exit       - exit from the program.
