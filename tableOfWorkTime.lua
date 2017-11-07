@@ -58,13 +58,13 @@ function TableOfWorkTime ()
             print(key .. ": " .. round(val/3600, 1000))
     end end 
 
-    public.programWorkTime = function ()
+    private.programWorkTime = function ()
         return private.timeOfProgramStoping - private.timeOfProgramStart
     end
 
     private.printTableBottom = function ()
         local timeSum         = sum(private.table)
-        local workProcent     = timeSum/public.programWorkTime() * 100
+        local workProcent     = timeSum/private.programWorkTime() * 100
         io.write(
             localization.timeSum     .. round(timeSum/3600, 1000) ..  "\n" ..
             localization.workProcent .. round(workProcent,  10)   .. "%\n"
