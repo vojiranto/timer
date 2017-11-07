@@ -17,12 +17,8 @@ end
 
 local printToConsoleAndInFile = function (string)
     local outString = os.date("%X") .. ": " .. string .. ".\n"
-    
-    io.write(outString) 
-
-    local file      = io.open("work_log.md", "a")
-    file:write(outString)
-    file:close()
+    io.write(outString)
+    writeFile("work_log.md", outString, "a")
 end
 
 

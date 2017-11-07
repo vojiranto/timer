@@ -5,3 +5,9 @@ function round (n, i)
         return n - n%1
 end end
 
+
+function writeFile (fileName, string, r)
+    local file = io.open(fileName, r or "w")
+    file:write(string)
+    file:close()
+end

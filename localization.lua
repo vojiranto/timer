@@ -6,9 +6,7 @@ setLocalization = function (code)
     }
     if localizationTable[code] then
         localization = dofile(localizationTable[code])
-        local iniFile = io.open("settings/lang.ini", "w")
-        iniFile:write(code)
-        iniFile:close()
+        writeFile("settings/lang.ini", code)
     elseif not localization then
         setLocalization("en")
 end end

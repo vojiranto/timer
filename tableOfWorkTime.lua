@@ -52,14 +52,12 @@ function TableOfWorkTime ()
     end end
 
     private.writeInFile = function ()
-        local file = io.open(private.fileName, "w")
-        file:write(
+        writeFile(private.fileName,
             "return {\n" ..
             "\ttimeOfProgramStart = " .. private.timeOfProgramStart .. ",\n"..
             "\ttable = " .. tableToString(private.table, 2)         .. "\n" .. 
             "}"
         )
-        file:close()
     end
 
     private.printTableBody = function ()
