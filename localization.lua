@@ -1,4 +1,4 @@
-setLocalization = function (code)
+function setLocalization (code)
     local localizationTable = {
         ru = "local/ru.lua",
         en = "local/en.lua",
@@ -11,7 +11,8 @@ setLocalization = function (code)
         setLocalization("en")
 end end
 
-initLocal = function ()
+
+function initLocal ()
     local iniFile = io.open("settings/lang.ini", "r")
     if iniFile then
         local code = iniFile:read()
