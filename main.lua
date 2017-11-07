@@ -27,6 +27,19 @@ local exit = function ()
 end
 
 
+local showTable = function (tableName) 
+    local fileName = "tables/".. tableName ..".lua"
+    local file = io.open(fileName, "r")
+    if file then
+        file:close()
+        local table = TableOfWorkTime()
+        table.load(fileName) 
+        table.print()
+    else
+        print(localization.tableNotExist)
+end end
+
+
 local userCommand = {
     help      = help,
     exit      = exit,

@@ -7,6 +7,7 @@ function ActiveTableOfWorkTime()
 
     public.print = function ()
         public.setTimeOfProgramStoping()
+        parent.writeTableInFile(private.fileName)
         parent.print()
     end
 
