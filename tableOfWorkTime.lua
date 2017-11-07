@@ -51,15 +51,6 @@ function TableOfWorkTime ()
             private.timeOfProgramStart = data.timeOfProgramStart
     end end
 
-    private.writeInFile = function ()
-        writeFile(private.fileName,
-            "return {\n" ..
-            "\ttimeOfProgramStart = " .. private.timeOfProgramStart .. ",\n"..
-            "\ttable = " .. tableToString(private.table, 2)         .. "\n" .. 
-            "}"
-        )
-    end
-
     private.printTableBody = function ()
         for key, val in pairs(private.table) do
             print(key .. ": " .. round(val/3600, 1000))
@@ -86,7 +77,12 @@ function TableOfWorkTime ()
 
     public.addIn = function (key, val)
         private.table[key] = (private.table[key] or 0) + val
-        private.writeInFile()
+        writeFile(private.fileName,
+            "return {\n" ..
+            "\ttimeOfProgramStart = " .. private.timeOfProgramStart .. ",\n"..
+            "\ttable = " .. tableToString(private.table, 2)         .. "\n" .. 
+            "}"
+        )
     end
 
     private.load()
