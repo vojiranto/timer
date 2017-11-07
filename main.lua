@@ -1,7 +1,7 @@
 #!/usr/bin/luajit
 -------------------------------------------------------------------------------
 -- Name:        SCTR - Simple Console Time Registrator                       --
--- Version:     0.1.2.1                                                      --
+-- Version:     0.1.3.1                                                      --
 -- Author:      D.A. Pavlyuk                                                 --
 -- License:     GPL                                                          --
 -- Description: The program for the account of working hours.                --
@@ -28,12 +28,24 @@ local exit = function ()
 end
 
 
+local setLocalization = function (code)
+    local localizationTable = {
+        ru = "local/ru.lua",
+        en = "local/en.lua",
+        eo = "local/eo.lua"
+    }
+    if localizationTable[code] then
+        localization = dofile(localizationTable[code])
+end end
+
+
 local userCommand = {
-    help  = help,
-    exit  = exit,
-    work  = tableOfWorkTime.print,
-    start = timer.start,
-    stop  = timer.stop,
+    help      = help,
+    exit      = exit,
+    ["local"] = setLocalization,
+    work      = tableOfWorkTime.print,
+    start     = timer.start,
+    stop      = timer.stop,
 }
 
 

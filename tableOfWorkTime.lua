@@ -5,21 +5,21 @@ local printLine = function ()
 end
 
 
-local space = function(n)
-    local space = ""
-    for i = 1, n do
-        space = "\t" .. space
-    end
-    return space
-end
-
-
 local sum = function (table)
     local result = 0
     for _, val in pairs(table) do
         result = result + val
     end
     return result
+end
+
+
+local space = function(n)
+    local space = ""
+    for i = 1, n do
+        space = "\t" .. space
+    end
+    return space
 end
 
 
