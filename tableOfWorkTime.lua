@@ -1,3 +1,7 @@
+local line = [[
+-------------------------------------------------------------------------------
+]]
+
 local printLine = function ()
     io.write[[
 -------------------------------------------------------------------------------
@@ -37,36 +41,38 @@ end
 
 function TableOfWorkTime ()
     local private = {
-        timeOfProgramStart   = os.time(),
-        timeOfProgramStoping = os.time(),
-        table                = {}
+        timeOfProgramStart = os.time(),
+        timeOfProgramStop  = os.time(),
+        table              = {}
     }
     local public = {}
 
     public.load = function (fileName)
         if fileExist(fileName) then
-            local data                   = dofile(fileName)
-            private.table                = data.table
-            private.timeOfProgramStart   = data.timeOfProgramStart
-            private.timeOfProgramStoping = data.timeOfProgramStoping
+            local data                 = dofile(fileName)
+            private.table              = data.table
+            private.timeOfProgramStart = data.timeOfProgramStart
+            private.timeOfProgramStop  = data.timeOfProgramStop
     end end
 
-    private.printTableBody = function ()
+    private.tableBody = function ()
+        local tmpTable = {}
         for key, val in pairs(private.table) do
-            print(key .. ": " .. round(val/3600, 1000))
-    end end 
+            tmpTable[#tmpTable + 1] = key .. ": " .. round(val/3600, 1000)
+        end
+        return table.concat(tmpTable, "\n") .. "\n"
+    end
 
     private.programWorkTime = function ()
         return private.timeOfProgramStoping - private.timeOfProgramStart
     end
 
-    private.printTableBottom = function ()
-        local timeSum         = sum(private.table)
-        local workProcent     = timeSum/private.programWorkTime() * 100
-        io.write(
+    private.tableBottom = function ()
+        local timeSum     = sum(private.table)
+        local workProcent = timeSum/private.programWorkTime() * 100
+        return
             localization.timeSum     .. round(timeSum/3600, 1000) ..  "\n" ..
             localization.workProcent .. round(workProcent,  10)   .. "%\n"
-        )
     end
 
     public.setTimeOfProgramStoping = function ()
@@ -74,19 +80,19 @@ function TableOfWorkTime ()
     end
 
     public.print = function ()
-        printLine()
-        private.printTableBody()
-        printLine()
-        private.printTableBottom()
-        printLine()        
+        io.write(
+            line ..
+            private.tableBody() .. line .. private.tableBottom() .. 
+            line
+        )
     end
 
     public.writeTableInFile = function (fileName)
         writeFile(fileName,
             "return {\n" ..
-            "\ttimeOfProgramStart   = " .. private.timeOfProgramStart   .. ",\n" ..
-            "\ttimeOfProgramStoping = " .. private.timeOfProgramStoping .. ",\n" ..
-            "\ttable = " .. tableToString(private.table, 2)             .. "\n"  .. 
+            "\ttimeOfProgramStart = " .. private.timeOfProgramStart .. ",\n" ..
+            "\ttimeOfProgramStop  = " .. private.timeOfProgramStop  .. ",\n" ..
+            "\ttable = " .. tableToString(private.table, 2)         .. "\n"  .. 
             "}"
         )
     end

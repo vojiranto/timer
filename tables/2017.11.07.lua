@@ -1,7 +1,8 @@
 return {
-	timeOfProgramStart   = 1510054307,
-	timeOfProgramStoping = 1510060720,
+	timeOfProgramStart = 1510054307,
+	timeOfProgramStop  = 1510075458,
 	table = {
-		work = 27
+		tmp = 4,
+		work = 33
 	}
 }
