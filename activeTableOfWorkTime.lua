@@ -6,14 +6,14 @@ function ActiveTableOfWorkTime()
     local parent  = copy(public)
 
     public.print = function ()
-        public.setTimeOfProgramStoping()
+        public.setTimeOfProgramStop()
         parent.writeTableInFile(private.fileName)
         parent.print()
     end
 
     public.addIn = function (key, val)
         parent.addIn(key, val)
-        parent.setTimeOfProgramStoping()
+        parent.setTimeOfProgramStop()
         parent.writeTableInFile(private.fileName)
     end
 

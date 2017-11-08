@@ -75,8 +75,8 @@ function TableOfWorkTime ()
             localization.workProcent .. round(workProcent,  10)   .. "%\n"
     end
 
-    public.setTimeOfProgramStoping = function ()
-        private.timeOfProgramStoping = os.time() 
+    public.setTimeOfProgramStop = function ()
+        private.timeOfProgramStop = os.time() 
     end
 
     public.print = function ()
