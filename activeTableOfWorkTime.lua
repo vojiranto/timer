@@ -5,19 +5,23 @@ function ActiveTableOfWorkTime()
     local public  = TableOfWorkTime ()
     local parent  = copy(public)
 
-    public.print = function ()
-        public.setTimeOfProgramStop()
+    public.update = function ()
+        parent.setTimeOfProgramStop()
         parent.writeTableInFile(private.fileName)
+    end
+
+    public.print = function ()
+        public.update()
         parent.print()
     end
 
     public.addIn = function (key, val)
         parent.addIn(key, val)
-        parent.setTimeOfProgramStop()
-        parent.writeTableInFile(private.fileName)
+        public.update()
     end
 
     parent.load(private.fileName)
+    public.update()
 
     return public
 end

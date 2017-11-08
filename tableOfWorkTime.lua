@@ -27,16 +27,20 @@ local space = function(n)
 end
 
 
-local tableToString = function (myTable, n)
-    local m = n or 1
-    local tmpTable = {}
-    for k, v in pairs(myTable) do
-        tmpTable[#tmpTable + 1] = k.." = "..v
-    end
-    return "{\n" ..
-        space(m) .. table.concat(tmpTable, ",\n" .. space(m)) .. "\n" .. 
-        space(m - 1) .. "}"
-end
+local function dataToString (elem, n)
+    if type(elem) == "table" then
+        local m = n or 1
+        local tmpTable = {}
+        for k, v in pairs(elem) do
+            if type(v) ~= "function" then
+                tmpTable[#tmpTable + 1] = k .." = " .. dataToString(v, m+1)
+        end end
+        return "{\n" ..
+            space(m) .. table.concat(tmpTable, ",\n" .. space(m)) .. "\n" .. 
+            space(m - 1) .. "}"
+    else
+        return tostring(elem)
+end end
 
 
 function TableOfWorkTime ()
@@ -88,13 +92,7 @@ function TableOfWorkTime ()
     end
 
     public.writeTableInFile = function (fileName)
-        writeFile(fileName,
-            "return {\n" ..
-            "\ttimeOfProgramStart = " .. private.timeOfProgramStart .. ",\n" ..
-            "\ttimeOfProgramStop  = " .. private.timeOfProgramStop  .. ",\n" ..
-            "\ttable = " .. tableToString(private.table, 2)         .. "\n"  .. 
-            "}"
-        )
+        writeFile(fileName, "return " .. dataToString(private, 1))
     end
 
     public.addIn = function (key, val)
