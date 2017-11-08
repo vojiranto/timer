@@ -64,7 +64,7 @@ function TableOfWorkTime ()
     end
 
     private.programWorkTime = function ()
-        return private.timeOfProgramStoping - private.timeOfProgramStart
+        return private.timeOfProgramStop - private.timeOfProgramStart
     end
 
     private.tableBottom = function ()
