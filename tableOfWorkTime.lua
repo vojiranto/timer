@@ -2,12 +2,6 @@ local line = [[
 -------------------------------------------------------------------------------
 ]]
 
-local printLine = function ()
-    io.write[[
--------------------------------------------------------------------------------
-]]
-end
-
 
 local sum = function (table)
     local result = 0
@@ -18,7 +12,7 @@ local sum = function (table)
 end
 
 
-local space = function(n)
+local space = function (n)
     local space = ""
     for i = 1, n do
         space = "\t" .. space
@@ -52,7 +46,7 @@ function TableOfWorkTime ()
     local public = {}
 
     public.load = function (fileName)
-        if fileExist(fileName) then
+        if File(fileName).exist() then
             for k, v in pairs(dofile(fileName)) do
                 private[k] = v
     end end end
@@ -90,7 +84,7 @@ function TableOfWorkTime ()
     end
 
     public.writeTableInFile = function (fileName)
-        writeFile(fileName, "return " .. dataToString(private, 1))
+        File(fileName).write("return " .. dataToString(private, 1))
     end
 
     public.addIn = function (key, val)

@@ -7,6 +7,7 @@
 -- Description: The program for the account of working hours.                --
 -------------------------------------------------------------------------------
 dofile("functions.lua")
+dofile("file.lua")
 dofile("localization.lua")
 dofile("tableOfWorkTime.lua")
 dofile("activeTableOfWorkTime.lua")
@@ -29,7 +30,7 @@ end
 
 local showTable = function (tableName) 
     local fileName = "tables/".. tableName ..".lua"
-    if fileExist(fileName) then
+    if File(fileName).exist() then
         local table = TableOfWorkTime()
         table.load(fileName) 
         table.print()

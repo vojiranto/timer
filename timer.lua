@@ -7,7 +7,7 @@ end end
 
 
 -- s => h:m:s
-local toNormalTimeFormat = function  (n)
+local toNormalTimeFormat = function (n)
     local s = round(n%60)
     local m = round(n/60%60)
     local h = round(n/3600%24)
@@ -18,7 +18,7 @@ end
 local printToConsoleAndInFile = function (string)
     local outString = os.date("%X") .. ": " .. string .. ".\n"
     io.write(outString)
-    writeFile("work_log.md", outString, "a")
+    File("work_log.md").write(outString, "a")
 end
 
 
