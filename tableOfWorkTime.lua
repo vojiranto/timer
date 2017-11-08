@@ -53,11 +53,9 @@ function TableOfWorkTime ()
 
     public.load = function (fileName)
         if fileExist(fileName) then
-            local data                 = dofile(fileName)
-            private.table              = data.table
-            private.timeOfProgramStart = data.timeOfProgramStart
-            private.timeOfProgramStop  = data.timeOfProgramStop
-    end end
+            for k, v in pairs(dofile(fileName)) do
+                private[k] = v
+    end end end
 
     private.tableBody = function ()
         local tmpTable = {}
