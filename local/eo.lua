@@ -4,6 +4,7 @@ return {
 SCTR - Simple Console Time Registrator
 Listo de la subtenataj komandoj:
     start name      - tempumi la taskon "name";
+    restart         - restarti tempumon de la nuna tasko;
     stop            - fini la tempumon;
     work time       - vidigi la uzitan tempon;
     show 2017.11.07 - vidigi la uzitan tenpon dum 2017.11.07;

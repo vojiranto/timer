@@ -4,6 +4,7 @@ return {
 SCTR - Simple Console Time Registrator
 List of supported commands:
     start name      - start the time for the task "name";
+    restart         - restart the current work ticket;
     stop            - finish off the task;
     work time       - show table of used time;
     show 2017.11.07 - show table of used time in 2017.11.07;

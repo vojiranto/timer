@@ -1,6 +1,6 @@
 function ActiveTableOfWorkTime()
     local private = {
-            fileName = "tables/".. os.date("%Y.%m.%d")..".lua",
+        fileName = "tables/".. os.date("%Y.%m.%d")..".lua",
     }
     local public  = TableOfWorkTime ()
     local parent  = copy(public)

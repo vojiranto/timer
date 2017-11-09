@@ -43,6 +43,10 @@ function Timer (tableOfWorkTime)
         tableOfWorkTime.addIn(private.ticketName, tmp_diff)
         printToConsoleAndInFile(toNormalTimeFormat(tmp_diff))
     end
-    
+
+    public.restart = function ()
+        public.start(ticketName)
+    end
+
     return public
 end
