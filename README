@@ -2,9 +2,10 @@ SCTR - Simple Console Time Registrator
 
 List of supported commands:
     1. start name      - start the time for the task "name";
-    2. stop            - finish off the task;
-    3. work time       - show table of used time;
-    4. show 2017.11.07 - show table of used time in 2017.11.07;
-    5. help            - show help;
-    6. local en        - change the language (en/eo/ru);
-    7. exit            - exit from the program.
+    2. restart         - restart the current work ticket;
+    3. stop            - finish off the task;
+    4. work time       - show table of used time;
+    5. show 2017.11.07 - show table of used time in 2017.11.07;
+    6. help            - show help;
+    7. local en        - change the language (en/eo/ru);
+    8. exit            - exit from the program.
