@@ -91,5 +91,5 @@ function TableOfWorkTime ()
         private.table[key] = (private.table[key] or 0) + val
     end
 
-    return public
+    return copy(public)
 end

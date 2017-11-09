@@ -20,6 +20,5 @@ function File(fileName)
         return tmp
     end
     
-    return public
+    return copy(public)
 end
-

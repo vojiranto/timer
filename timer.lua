@@ -48,5 +48,5 @@ function Timer (tableOfWorkTime)
         public.start(ticketName)
     end
 
-    return public
+    return copy(public)
 end

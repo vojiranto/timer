@@ -23,5 +23,5 @@ function ActiveTableOfWorkTime()
     parent.load(private.fileName)
     public.update()
 
-    return public
+    return copy(public)
 end
