@@ -13,12 +13,20 @@ function File(fileName)
         file:close()
     end
     
-    public.read = function (string, r, m)
+    public.read = function (r, m)
         local file = io.open(fileName, r or "r")
         local tmp  = file:read(m or "*all")
         file:close()
         return tmp
     end
     
+    public.readIfExist(m)
+        local file = io.open(fileName, r or "r")
+        if file then
+            local tmp = file:read(m or "*all")
+            file.close()
+            return tmp
+    end end
+
     return copy(public)
 end

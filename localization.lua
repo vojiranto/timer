@@ -13,12 +13,4 @@ function setLocalization (code)
         setLocalization("en")
 end end
 
-
-function initLocal ()
-    if file.exist() then
-        setLocalization(file.read())
-    else
-        setLocalization("en")
-end end
-
-initLocal()
+setLocalization(file.readIfExist())
