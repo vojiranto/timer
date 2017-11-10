@@ -27,7 +27,8 @@ local function dataToString (elem, n)
         local tmpTable = {}
         for k, v in pairs(elem) do
             if type(v) ~= "function" then
-                tmpTable[#tmpTable + 1] = k .." = " .. dataToString(v, m+1)
+                tmpTable[#tmpTable + 1] =
+                    "[\"" .. k .."\"] = " .. dataToString(v, m+1)
         end end
         return "{\n" ..
             space(m) .. table.concat(tmpTable, ",\n" .. space(m)) .. "\n" .. 

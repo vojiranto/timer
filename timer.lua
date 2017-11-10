@@ -38,14 +38,14 @@ function Timer (tableOfWorkTime)
 
     public.stop = function ()
         if private.state ~= "started" then return end
-        private.state = "stoped"
+        private.state  = "stoped"
         local tmp_diff = os.time() - private.timeOfStart
         tableOfWorkTime.addIn(private.ticketName, tmp_diff)
         printToConsoleAndInFile(toNormalTimeFormat(tmp_diff))
     end
 
     public.restart = function ()
-        public.start(ticketName)
+        public.start(private.ticketName)
     end
 
     return copy(public)

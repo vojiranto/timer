@@ -15,7 +15,7 @@ function File(fileName)
     
     public.read = function (string, r, m)
         local file = io.open(fileName, r or "r")
-        local tmp = file:read(m or "*all")
+        local tmp  = file:read(m or "*all")
         file:close()
         return tmp
     end
