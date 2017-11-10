@@ -6,6 +6,7 @@ function setLocalization (code)
         en = "local/en.lua",
         eo = "local/eo.lua"
     }
+
     if localizationTable[code] then
         localization = dofile(localizationTable[code])
         file.write(code)

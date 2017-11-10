@@ -20,7 +20,7 @@ function File(fileName)
         return tmp
     end
     
-    public.readIfExist(m)
+    public.readIfExist = function (m)
         local file = io.open(fileName, r or "r")
         if file then
             local tmp = file:read(m or "*all")
