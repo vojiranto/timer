@@ -27,23 +27,20 @@ function Show (index)
     private.generalTablePrint = function (filter)
         local sumTable, tmpTable = TableOfWorkTime(), TableOfWorkTime()
         for _, tableName in pairs(index.getIndex()) do   
-            if not filter or private.isInCurrentMonth(tableName) then
+            if filter(tableName) then
                 private.addTable(sumTable, tableName)
         end end
         private.printTable(sumTable)
     end
 
-    private.sumTable     = function () private.generalTablePrint()     end
-    private.currentMonth = function () private.generalTablePrint("ok") end
-
     public.table = function (tableName) 
         if tableName == "sum table" then
-            private.sumTable()
-            return    
+            private.generalTablePrint(funTrue)
+            return
         end
 
         if tableName == "current month" then
-            private.currentMonth()
+            private.generalTablePrint(private.isInCurrentMonth)
             return
         end
 

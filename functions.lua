@@ -1,3 +1,6 @@
+function funTrue  () return true  end
+function funFalse () return false end
+
 function round (n, i)
     if i then
         return round(n*i)/i
