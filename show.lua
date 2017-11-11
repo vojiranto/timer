@@ -33,22 +33,21 @@ function Show (index)
         private.printTable(sumTable)
     end
 
-    public.table = function (tableName) 
+    private.loadEndPrint = function (fileName)
+        local table = TableOfWorkTime()
+        table.load(fileName) 
+        table.print()    
+    end
+
+    public.table = function (tableName)
+        local fileName = "tables/".. tableName ..".lua"    
+
         if tableName == "sum table" then
             private.generalTablePrint(funTrue)
-            return
-        end
-
-        if tableName == "current month" then
+        elseif tableName == "current month" then
             private.generalTablePrint(private.isInCurrentMonth)
-            return
-        end
-
-        local fileName = "tables/".. tableName ..".lua"
-        if File(fileName).exist() then
-            local table = TableOfWorkTime()
-            table.load(fileName) 
-            table.print()
+        elseif File(fileName).exist() then
+            private.loadEndPrint(fileName)
         else
             print(localization.tableNotExist)
     end end
