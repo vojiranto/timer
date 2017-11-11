@@ -1,4 +1,4 @@
-function ActiveTableOfWorkTime()
+function ActiveTableOfWorkTime(tableIndex)
     local private = {
         fileName  = "tables/".. os.date("%Y.%m.%d")..".lua",
     }
@@ -7,6 +7,8 @@ function ActiveTableOfWorkTime()
 
     public.update = function ()
         parent.setTimeOfProgramStop()
+        tableIndex.insert()
+        tableIndex.write()        
         parent.writeTableInFile(private.fileName)
     end
 

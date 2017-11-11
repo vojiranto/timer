@@ -12,32 +12,6 @@ local sum = function (table)
 end
 
 
-local space = function (n)
-    local space = ""
-    for i = 1, n do
-        space = "\t" .. space
-    end
-    return space
-end
-
-
-local function dataToString (elem, n)
-    if type(elem) == "table" then
-        local m = n or 1
-        local tmpTable = {}
-        for k, v in pairs(elem) do
-            if type(v) ~= "function" then
-                tmpTable[#tmpTable + 1] =
-                    "[\"" .. k .."\"] = " .. dataToString(v, m+1)
-        end end
-        return "{\n" ..
-            space(m) .. table.concat(tmpTable, ",\n" .. space(m)) .. "\n" .. 
-            space(m - 1) .. "}"
-    else
-        return tostring(elem)
-end end
-
-
 function TableOfWorkTime ()
     local private = {
         timeOfProgramStart = os.time(),
@@ -90,6 +64,10 @@ function TableOfWorkTime ()
 
     public.addIn = function (key, val)
         private.table[key] = (private.table[key] or 0) + val
+    end
+    
+    public.table = function ()
+        return copy(private.table)
     end
 
     return copy(public)
