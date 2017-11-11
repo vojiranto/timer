@@ -1,4 +1,4 @@
-local line = [[
+line = [[
 -------------------------------------------------------------------------------
 ]]
 
@@ -26,7 +26,7 @@ function TableOfWorkTime ()
                 private[k] = v
     end end end
 
-    private.tableBody = function ()
+    public.tableBody = function ()
         local tmpTable = {}
         for key, val in pairs(private.table) do
             tmpTable[#tmpTable + 1] = key .. ": " .. round(val/3600, 1000)
@@ -38,12 +38,19 @@ function TableOfWorkTime ()
         return private.timeOfProgramStop - private.timeOfProgramStart
     end
 
-    private.tableBottom = function ()
-        local timeSum     = sum(private.table)
-        local workProcent = timeSum/private.programWorkTime() * 100
-        return
-            localization.timeSum     .. round(timeSum/3600, 1000) ..  "\n" ..
-            localization.workProcent .. round(workProcent,  10)   .. "%\n"
+    public.tableBottom = function (ok)
+        local sumString, procentString = "", ""
+        local timeSum = sum(private.table)
+        if ok.sumString then
+            sumString = localization.timeSum .. round(timeSum/3600, 1000) .. "\n"
+        end
+        
+        if ok.procentString then
+            local workProcent = timeSum/private.programWorkTime() * 100
+            procentString = localization.workProcent .. round(workProcent, 10) .. "%\n"
+        end
+        
+        return sumString .. procentString
     end
 
     public.setTimeOfProgramStop = function ()
@@ -53,7 +60,9 @@ function TableOfWorkTime ()
     public.print = function ()
         io.write(
             line ..
-            private.tableBody() .. line .. private.tableBottom() .. 
+            public.tableBody() .. 
+            line .. 
+            public.tableBottom{sumString = "ok", procentString = "ok"} .. 
             line
         )
     end
