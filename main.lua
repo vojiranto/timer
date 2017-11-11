@@ -8,8 +8,9 @@
 -------------------------------------------------------------------------------
 local files = {
     "functions", "file", "localization", "index", "tableOfWorkTime",
-    "activeTableOfWorkTime", "timer"
+    "activeTableOfWorkTime", "timer", "show"
 }
+
 for _, fileName in pairs(files) do
     dofile(fileName .. ".lua")
 end
@@ -21,6 +22,7 @@ end
 
 local tableIndex      = Index()
 local tableOfWorkTime = ActiveTableOfWorkTime(tableIndex)
+local show            = Show(tableIndex)
 local timer           = Timer(tableOfWorkTime)
 
 local exit = function ()
@@ -30,45 +32,12 @@ local exit = function ()
 end
 
 
-local showSumTable = function () 
-    local sumTable, tmpTable = TableOfWorkTime(), TableOfWorkTime()
-    for _, tableName in pairs(tableIndex.getIndex()) do   
-        tmpTable.load("tables/".. tableName ..".lua")
-        for key, val in pairs(tmpTable.table()) do
-            sumTable.addIn(key, val)
-    end end
-
-    io.write(
-        line ..
-        sumTable.tableBody() .. 
-        line ..
-        sumTable.tableBottom{sumString = "ok"} ..
-        line
-    )
-end
-
-
-local showTable = function (tableName) 
-    if tableName == "sum table" then
-        showSumTable()
-        return    
-    end
-
-    local fileName = "tables/".. tableName ..".lua"
-    if File(fileName).exist() then
-        local table = TableOfWorkTime()
-        table.load(fileName) 
-        table.print()
-    else
-        print(localization.tableNotExist)
-end end
-
 
 local userCommand = {
     help      = help,
     exit      = exit,
     ["local"] = setLocalization,
-    show      = showTable,
+    show      = show.table,
     work      = tableOfWorkTime.print,
     start     = timer.start,
     restart   = timer.restart,
