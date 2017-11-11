@@ -37,12 +37,18 @@ end
 
 local userCommand = {
     help      = help,
+    h         = help,
     exit      = exit,
+    e         = exit,
     ["local"] = setLocalization,
+    l         = setLocalization,
     show      = show.table,
+    sh        = show.table,        
     work      = tableOfWorkTime.print,
+    wt        = tableOfWorkTime.print,
     start     = timer.start,
     restart   = timer.restart,
+    r         = timer.restart,
     stop      = timer.stop,
 }
 
