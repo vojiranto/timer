@@ -13,6 +13,14 @@ Listo de la subtenataj komandoj:
     exit            - eliri el la programo.
 -------------------------------------------------------------------------------
 ]],
+    helpShow      = [[
+-------------------------------------------------------------------------------
+La komando "show" reagas diverse, por diversaj argumentoj.
+    show 2017.11.07    - vidigi la uzitan tenpon dum 2017.11.07;
+    show current month - vidigi la uzitan tenpon dum la nuna monato.
+    show sum table     - vidigi la uzitan tenpon.
+-------------------------------------------------------------------------------
+]],
     timeSum       = "tuta tempo:          ",
     workProcent   = "labortempa procento: ",
     startOf       = "starto de tasko "
