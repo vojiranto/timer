@@ -1,7 +1,7 @@
 #!/usr/bin/luajit
 -------------------------------------------------------------------------------
 -- Name:        SCTR - Simple Console Time Registrator                       --
--- Version:     0.2.4.0                                                      --
+-- Version:     0.2.4.1                                                      --
 -- Author:      D.A. Pavlyuk                                                 --
 -- License:     GPL                                                          --
 -- Description: The program for the account of working hours.                --

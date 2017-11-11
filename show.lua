@@ -17,18 +17,19 @@ function Show (index)
         )
     end
 
+    private.addTable = function (sumTable, tableName)
+        local tmpTable = TableOfWorkTime()
+        tmpTable.load("tables/".. tableName ..".lua")
+        for key, val in pairs(tmpTable.table()) do
+            sumTable.addIn(key, val)
+    end end
+
     private.generalTablePrint = function (filter)
         local sumTable, tmpTable = TableOfWorkTime(), TableOfWorkTime()
         for _, tableName in pairs(index.getIndex()) do   
-            if filter and (not private.isInCurrentMonth(tableName)) then
-                break
-            end
-
-            tmpTable.load("tables/".. tableName ..".lua")
-            for key, val in pairs(tmpTable.table()) do
-                sumTable.addIn(key, val)
+            if not filter or private.isInCurrentMonth(tableName) then
+                private.addTable(sumTable, tableName)
         end end
-
         private.printTable(sumTable)
     end
 
