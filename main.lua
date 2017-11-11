@@ -7,14 +7,13 @@
 -- Description: The program for the account of working hours.                --
 -------------------------------------------------------------------------------
 local files = {
-    "functions", "file", "localization", "index", "tableOfWorkTime",
-    "activeTableOfWorkTime", "timer", "show"
+    "functions",       "file",                  "localization", "index",
+    "tableOfWorkTime", "activeTableOfWorkTime", "timer",        "show"
 }
 
 for _, fileName in pairs(files) do
     dofile(fileName .. ".lua")
 end
-
 
 local help = function ()
     io.write(localization.help)
@@ -25,12 +24,12 @@ local tableOfWorkTime = ActiveTableOfWorkTime(tableIndex)
 local show            = Show(tableIndex)
 local timer           = Timer(tableOfWorkTime)
 
+
 local exit = function ()
     timer.stop()
     tableOfWorkTime.print()
     os.exit()
 end
-
 
 
 local userCommand = {
