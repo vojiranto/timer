@@ -6,13 +6,14 @@
 -- License:     GPL                                                          --
 -- Description: The program for the account of working hours.                --
 -------------------------------------------------------------------------------
-dofile("functions.lua")
-dofile("file.lua")
-dofile("localization.lua")
-dofile("index.lua")
-dofile("tableOfWorkTime.lua")
-dofile("activeTableOfWorkTime.lua")
-dofile("timer.lua")
+local files = {
+    "functions", "file", "localization", "index", "tableOfWorkTime",
+    "activeTableOfWorkTime", "timer"
+}
+for _, fileName in pairs(files) do
+    dofile(fileName .. ".lua")
+end
+
 
 local help = function ()
     io.write(localization.help)
@@ -36,6 +37,7 @@ local showSumTable = function ()
         for key, val in pairs(tmpTable.table()) do
             sumTable.addIn(key, val)
     end end
+
     io.write(
         line ..
         sumTable.tableBody() .. 
