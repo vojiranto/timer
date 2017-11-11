@@ -42,9 +42,9 @@ function Show (index)
     public.table = function (tableName)
         local fileName = "tables/".. tableName ..".lua"    
 
-        if tableName == "sum table" then
+        if elem (tableName, {"sum table", "st"}) then
             private.generalTablePrint(funTrue)
-        elseif tableName == "current month" then
+        elseif elem(tableName, {"current month", "cm"}) then
             private.generalTablePrint(private.isInCurrentMonth)
         elseif File(fileName).exist() then
             private.loadEndPrint(fileName)

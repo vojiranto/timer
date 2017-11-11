@@ -27,6 +27,13 @@ local space = function (n)
 end
 
 
+function elem (x, list)
+    for k, v in pairs (list) do
+        if v == x then
+            return true
+end end end
+
+
 function keyToString (key)
     if type(key) == "string" then
         return "[\"" .. key .. "\"]"
