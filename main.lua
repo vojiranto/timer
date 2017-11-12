@@ -35,21 +35,15 @@ local exit = function ()
 end
 
 
-local userCommand = {
-    help      = help,
-    h         = help,
-    exit      = exit,
-    e         = exit,
-    ["local"] = setLocalization,
-    l         = setLocalization,
-    show      = show.table,
-    sh        = show.table,        
-    work      = tableOfWorkTime.print,
-    wt        = tableOfWorkTime.print,
-    start     = timer.start,
-    restart   = timer.restart,
-    r         = timer.restart,
-    stop      = timer.stop,
+local userCommand = comands {
+    [{"help",    "h"}]  = help,
+    [{"exit",    "e"}]  = exit,
+    [{"local",   "l"}]  = setLocalization,
+    [{"show",    "sh"}] = show.table,
+    [{"work",    "wt"}] = tableOfWorkTime.print,
+    [{"restart", "r"}]  = timer.restart,
+    start               = timer.start,
+    stop                = timer.stop,
 }
 
 

@@ -59,3 +59,17 @@ function dataToString (elem, n)
     else
         return tostring(elem)
 end end
+
+
+function comands (com)
+    local res = {}
+    for key, val in pairs(com) do
+        if type(key) == "table" then 
+            for _, k in pairs(key) do
+                res[k] = val
+            end  
+        else
+            res[key] = val
+    end end
+    return res
+end
