@@ -6,14 +6,15 @@
 -- License:     GPL                                                          --
 -- Description: The program for the account of working hours.                --
 -------------------------------------------------------------------------------
-local files = {
+function dofiles (files)
+    for _, fileName in pairs(files) do
+        dofile(fileName .. ".lua")
+end end
+
+dofiles {
     "functions",       "file",                  "localization", "index",
     "tableOfWorkTime", "activeTableOfWorkTime", "timer",        "show"
 }
-
-for _, fileName in pairs(files) do
-    dofile(fileName .. ".lua")
-end
 
 local help = function (cmd)
     if cmd == "show" then
