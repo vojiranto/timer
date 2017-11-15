@@ -1,3 +1,10 @@
+--------------------------------------------------------------------------------
+-- Name:        Functions                                                     --
+-- Version:     0.0.0.1                                                       --
+-- Author:      D.A. Pavlyuk                                                  --
+-- License:     GPL                                                           --
+-- Description: Set of simple functions.                                      --
+--------------------------------------------------------------------------------
 function funTrue  () return true  end
 function funFalse () return false end
 
