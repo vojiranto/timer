@@ -9,6 +9,7 @@ function funTrue  () return true  end
 function funFalse () return false end
 
 
+-- округляем число n до i-той части.
 function round (n, i)
     if i then
         return round(n*i)/i
@@ -17,7 +18,7 @@ function round (n, i)
 end end
 
 
-
+-- суммируем элементы таблицы
 function sum (table)
     local result = 0
     for _, val in pairs(table) do
@@ -27,6 +28,7 @@ function sum (table)
 end
 
 
+-- копируем таблицу
 function copy (t)
     local result = {}
     for k, v in pairs(t) do
@@ -36,6 +38,7 @@ function copy (t)
 end
 
 
+-- создаём отступ шириной в n.
 local space = function (n)
     local space = ""
     for i = 1, n do
@@ -45,6 +48,7 @@ local space = function (n)
 end
 
 
+-- икс входит в таблицу.
 function elem (x, list)
     for k, v in pairs (list) do
         if v == x then
@@ -52,6 +56,7 @@ function elem (x, list)
 end end end
 
 
+-- преобразовать ключ в строку
 function keyToString (key)
     if type(key) == "string" then
         return "[\"" .. key .. "\"]"
@@ -60,6 +65,7 @@ function keyToString (key)
 end end
 
 
+-- сериализация данных
 function dataToString (elem, n)
     if type(elem) == "table" then
         local m = n or 1
@@ -67,7 +73,7 @@ function dataToString (elem, n)
         for k, v in pairs(elem) do
             if type(v) ~= "function" then
                 tmpTable[#tmpTable + 1] =
-                    keyToString(k) .. " = " .. dataToString(v, m+1)
+                    keyToString(k) .. " = " .. dataToString(v, m + 1)
         end end
         return "{\n" ..
             space(m) .. table.concat(tmpTable, ",\n" .. space(m)) .. "\n" .. 
@@ -79,6 +85,13 @@ function dataToString (elem, n)
 end end
 
 
+--[[
+-- список команд, которым нужно присвоить действия.
+comands {
+    [{"cmd1", "cmd2"}] = fun1,
+    [{"cmd3", "cmd4"}] = fun2,
+}
+--]]
 function comands (com)
     local res = {}
     for key, val in pairs(com) do
