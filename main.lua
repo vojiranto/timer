@@ -24,23 +24,22 @@ dofiles {
     "show",
 }
 
+
+local objs = {}
+objs.localization    = new.Localization()
+objs.tableIndex      = new.Index()
+objs.tableOfWorkTime = new.ActiveTableOfWorkTime(objs.tableIndex)
+objs.show            = new.Show(objs.tableIndex)
+objs.timer           = new.Timer(objs.tableOfWorkTime)
+objs.localization.init()
+
+
 local function help (cmd)
     if cmd == "show" then
         io.write(localization.helpShow)
     else    
         io.write(localization.help)
 end end
-
-local objs = {}
-
-objs.localization    = new.Localization()
-objs.tableIndex      = new.Index()
-objs.tableOfWorkTime = new.ActiveTableOfWorkTime(objs.tableIndex)
-objs.show            = new.Show(objs.tableIndex)
-objs.timer           = new.Timer(objs.tableOfWorkTime)
-
-
-objs.localization.init()
 
 
 local function exit ()

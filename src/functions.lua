@@ -19,6 +19,7 @@ end end
 
 
 -- суммируем элементы таблицы
+-- sum {1, 2, 3} == 6
 function sum (table)
     local result = 0
     for _, val in pairs(table) do
@@ -48,7 +49,7 @@ local space = function (n)
 end
 
 
--- икс входит в таблицу.
+-- входит ли икс входит в таблицу?
 function elem (x, list)
     for k, v in pairs (list) do
         if v == x then
@@ -87,18 +88,18 @@ end end
 
 --[[
 -- список команд, которым нужно присвоить действия.
-comands {
+userCommand = comands {
     [{"cmd1", "cmd2"}] = fun1,
     [{"cmd3", "cmd4"}] = fun2,
-}
---]]
+    cmd5               = fun3,
+}]]
 function comands (com)
     local res = {}
     for key, val in pairs(com) do
         if type(key) == "table" then 
             for _, k in pairs(key) do
                 res[k] = val
-            end  
+            end
         else
             res[key] = val
     end end
