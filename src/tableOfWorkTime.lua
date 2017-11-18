@@ -12,7 +12,7 @@ local sum = function (table)
 end
 
 
-function TableOfWorkTime ()
+function new.TableOfWorkTime ()
     local private = {
         timeOfProgramStart = os.time(),
         timeOfProgramStop  = os.time(),
@@ -21,7 +21,7 @@ function TableOfWorkTime ()
     local public = {}
 
     public.load = function (fileName)
-        if File(fileName).exist() then
+        if new.File(fileName).exist() then
             for k, v in pairs(dofile(fileName)) do
                 private[k] = v
     end end end
@@ -68,7 +68,7 @@ function TableOfWorkTime ()
     end
 
     public.writeTableInFile = function (fileName)
-        File(fileName).write("return " .. dataToString(private, 1))
+        new.File(fileName).write("return " .. dataToString(private, 1))
     end
 
     public.addIn = function (key, val)

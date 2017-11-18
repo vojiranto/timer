@@ -1,4 +1,4 @@
-function File(fileName) 
+function new.File(fileName) 
     local public = {}
     public.exist = function ()
         local file = io.open(fileName, "r")

@@ -1,5 +1,5 @@
-function Index ()
-    local file = File("tables/index.lua")
+function new.Index ()
+    local file = new.File("tables/index.lua")
     local private = {}
     local public = {}
     

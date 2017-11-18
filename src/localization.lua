@@ -1,4 +1,4 @@
-local file = File("settings/lang.ini")
+local file = new.File("settings/lang.ini")
 
 function setLocalization (code)
     local localizationTable = {

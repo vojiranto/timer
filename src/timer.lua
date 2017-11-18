@@ -22,7 +22,7 @@ local printToConsoleAndInFile = function (string)
 end
 
 
-function Timer (tableOfWorkTime)
+function new.Timer (tableOfWorkTime)
     local private = {}
     local public  = {}
     

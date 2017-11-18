@@ -1,7 +1,7 @@
 #!/usr/bin/luajit
 -------------------------------------------------------------------------------
 -- Name:        SCTR - Simple Console Time Registrator                       --
--- Version:     0.2.4.3                                                      --
+-- Version:     0.2.4.5                                                      --
 -- Author:      D.A. Pavlyuk                                                 --
 -- License:     GPL                                                          --
 -- Description: The program for the account of working hours.                --
@@ -12,6 +12,7 @@ function dofiles (files)
         dofile("src/".. fileName .. ".lua")
 end end
 
+new = {}
 dofiles {
     "functions",       "file",                  "localization", "index",
     "tableOfWorkTime", "activeTableOfWorkTime", "timer",        "show"
@@ -25,10 +26,10 @@ local function help (cmd)
 end end
 
 
-local tableIndex      = Index()
-local tableOfWorkTime = ActiveTableOfWorkTime(tableIndex)
-local show            = Show(tableIndex)
-local timer           = Timer(tableOfWorkTime)
+local tableIndex      = new.Index()
+local tableOfWorkTime = new.ActiveTableOfWorkTime(tableIndex)
+local show            = new.Show(tableIndex)
+local timer           = new.Timer(tableOfWorkTime)
 
 
 local function exit ()

@@ -1,8 +1,8 @@
-function ActiveTableOfWorkTime(tableIndex)
+function new.ActiveTableOfWorkTime(tableIndex)
     local private = {
         fileName  = "tables/".. os.date("%Y.%m.%d")..".lua",
     }
-    local public  = TableOfWorkTime ()
+    local public  = new.TableOfWorkTime ()
     local parent  = copy(public)
 
     public.update = function ()
