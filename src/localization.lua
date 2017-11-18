@@ -1,17 +1,24 @@
-local file = new.File("settings/lang.ini")
+function new.Localization ()
+    local file   = new.File("settings/lang.ini")
+    local public = {}
+    
+    public.set = function (code)
+        local table = {
+            ru = "local/ru.lua",
+            en = "local/en.lua",
+            eo = "local/eo.lua"
+        }
 
-function setLocalization (code)
-    local localizationTable = {
-        ru = "local/ru.lua",
-        en = "local/en.lua",
-        eo = "local/eo.lua"
-    }
+        if table[code] then
+            localization = dofile(table[code])
+            file.write(code)
+        elseif not localization then
+            setLocalization("en")
+    end end
+    
+    public.init = function ()
+        public.set(file.readIfExist())
+    end
 
-    if localizationTable[code] then
-        localization = dofile(localizationTable[code])
-        file.write(code)
-    elseif not localization then
-        setLocalization("en")
-end end
-
-setLocalization(file.readIfExist())
+    return copy(public) 
+end

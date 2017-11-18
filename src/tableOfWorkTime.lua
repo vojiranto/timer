@@ -3,15 +3,6 @@ line = [[
 ]]
 
 
-local sum = function (table)
-    local result = 0
-    for _, val in pairs(table) do
-        result = result + val
-    end
-    return result
-end
-
-
 function new.TableOfWorkTime ()
     local private = {
         timeOfProgramStart = os.time(),

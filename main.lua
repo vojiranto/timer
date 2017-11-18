@@ -14,8 +14,14 @@ end end
 
 new = {}
 dofiles {
-    "functions",       "file",                  "localization", "index",
-    "tableOfWorkTime", "activeTableOfWorkTime", "timer",        "show"
+    "functions",
+    "file",    
+    "localization",
+    "index",
+    "tableOfWorkTime",
+    "activeTableOfWorkTime",
+    "timer",
+    "show",
 }
 
 local function help (cmd)
@@ -25,16 +31,21 @@ local function help (cmd)
         io.write(localization.help)
 end end
 
+local objs = {}
 
-local tableIndex      = new.Index()
-local tableOfWorkTime = new.ActiveTableOfWorkTime(tableIndex)
-local show            = new.Show(tableIndex)
-local timer           = new.Timer(tableOfWorkTime)
+objs.localization    = new.Localization()
+objs.tableIndex      = new.Index()
+objs.tableOfWorkTime = new.ActiveTableOfWorkTime(objs.tableIndex)
+objs.show            = new.Show(objs.tableIndex)
+objs.timer           = new.Timer(objs.tableOfWorkTime)
+
+
+objs.localization.init()
 
 
 local function exit ()
-    timer.stop()
-    tableOfWorkTime.print()
+    objs.timer.stop()
+    objs.tableOfWorkTime.print()
     os.exit()
 end
 
@@ -42,12 +53,12 @@ end
 local userCommand = comands {
     [{"help",    "h"}]  = help,
     [{"exit",    "e"}]  = exit,
-    [{"local",   "l"}]  = setLocalization,
-    [{"show",    "sh"}] = show.table,
-    [{"work",    "wt"}] = tableOfWorkTime.print,
-    [{"restart", "r"}]  = timer.restart,
-    start               = timer.start,
-    stop                = timer.stop,
+    [{"local",   "l"}]  = objs.localization.set,
+    [{"show",    "sh"}] = objs.show.table,
+    [{"work",    "wt"}] = objs.tableOfWorkTime.print,
+    [{"restart", "r"}]  = objs.timer.restart,
+    start               = objs.timer.start,
+    stop                = objs.timer.stop,
 }
 
 
