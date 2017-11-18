@@ -17,9 +17,13 @@ function new.Show (index)
         )
     end
 
+    private.patchToTable = function (tableName)
+        return "tables/".. tableName ..".lua"
+    end
+
     private.addTable = function (sumTable, tableName)
         local tmpTable = new.TableOfWorkTime()
-        tmpTable.load("tables/".. tableName ..".lua")
+        tmpTable.load(private.patchToTable(tableName))
         for key, val in pairs(tmpTable.table()) do
             sumTable.addIn(key, val)
     end end
@@ -34,13 +38,13 @@ function new.Show (index)
     end
 
     private.loadEndPrint = function (fileName)
-        local table = TableOfWorkTime()
+        local table = new.TableOfWorkTime()
         table.load(fileName) 
-        table.print()    
+        table.print()
     end
 
     public.table = function (tableName)
-        local fileName = "tables/".. tableName ..".lua"    
+        local fileName = private.patchToTable(tableName)   
 
         if elem (tableName, {"sum table", "st"}) then
             private.generalTablePrint(funTrue)
