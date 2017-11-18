@@ -46,7 +46,7 @@ function new.Show (index)
             private.generalTablePrint(funTrue)
         elseif elem(tableName, {"current month", "cm"}) then
             private.generalTablePrint(private.isInCurrentMonth)
-        elseif File(fileName).exist() then
+        elseif new.File(fileName).exist() then
             private.loadEndPrint(fileName)
         else
             print(localization.tableNotExist)
