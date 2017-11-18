@@ -6,9 +6,10 @@
 -- License:     GPL                                                          --
 -- Description: The program for the account of working hours.                --
 -------------------------------------------------------------------------------
+
 function dofiles (files)
     for _, fileName in pairs(files) do
-        dofile(fileName .. ".lua")
+        dofile("src/".. fileName .. ".lua")
 end end
 
 dofiles {
