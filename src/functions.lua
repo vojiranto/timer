@@ -85,6 +85,13 @@ function dataToString (elem, n)
         return tostring(elem)
 end end
 
+function set (t)
+    local res = {}
+    for v, k in pairs(t) do
+        res[k] = v
+    end
+    return res
+end
 
 --[[
 -- список команд, которым нужно присвоить действия.

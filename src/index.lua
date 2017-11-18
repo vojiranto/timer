@@ -1,11 +1,12 @@
 function new.Index ()
-    local file = new.File("tables/index.lua")
+    local indexPath = "tables/index.lua"
+    local file = new.File(indexPath)
     local private = {}
     local public = {}
     
     private.load = function ()
         if file.exist() then
-            private.index = dofile("tables/index.lua")
+            private.index = dofile(indexPath)
     end end
     
     public.insert = function ()

@@ -3,14 +3,8 @@ function new.Localization ()
     local public = {}
     
     public.set = function (code)
-        local table = {
-            ru = "local/ru.lua",
-            en = "local/en.lua",
-            eo = "local/eo.lua"
-        }
-
-        if table[code] then
-            localization = dofile(table[code])
+        if elem(code, {"ru", "en", "eo"}) then
+            localization = dofile("local/" .. code .. ".lua")
             file.write(code)
         elseif not localization then
             setLocalization("en")
