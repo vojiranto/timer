@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 -- Name:        Functions                                                     --
--- Version:     0.0.0.1                                                       --
+-- Version:     0.0.0.3                                                       --
 -- Author:      D.A. Pavlyuk                                                  --
 -- License:     GPL                                                           --
 -- Description: Set of simple functions.                                      --
@@ -85,6 +85,8 @@ function dataToString (elem, n)
         return tostring(elem)
 end end
 
+
+-- строим множество, по которому легко выяснить входить ли в него элемент.
 function set (t)
     local res = {}
     for v, k in pairs(t) do
@@ -92,6 +94,7 @@ function set (t)
     end
     return res
 end
+
 
 --[[
 -- список команд, которым нужно присвоить действия.
