@@ -1,3 +1,8 @@
+--------------------------------------------------------------------------------
+-- Name:            Timer                                                     --
+-- Dependencies:    Functions, File, Localization, TableOfWorkTime, Index,    --
+--                  ActiveTableOfWorkTime                                     --
+--------------------------------------------------------------------------------
 local addZeroToNumber = function (n)
     if #tostring(n) < 2 then 
         return "0"..n
@@ -18,7 +23,7 @@ end
 local printToConsoleAndInFile = function (string)
     local outString = os.date("%X") .. ": " .. string .. ".\n"
     io.write(outString)
-    File("work_log.md").write(outString, "a")
+    new.File("work_log.md").write(outString, "a")
 end
 
 

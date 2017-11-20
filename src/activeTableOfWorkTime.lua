@@ -1,3 +1,8 @@
+--------------------------------------------------------------------------------
+-- Name:            ActiveTableOfWorkTime                                     --
+-- Dependencies:    Functions, File, Localization, TableOfWorkTime, Index     --
+--------------------------------------------------------------------------------
+
 function new.ActiveTableOfWorkTime(tableIndex)
     local private = {
         fileName  = "tables/".. os.date("%Y.%m.%d")..".lua",

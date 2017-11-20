@@ -1,3 +1,7 @@
+--------------------------------------------------------------------------------
+-- Name:            Localization                                              --
+-- Dependencies:    Functions, File                                           --
+--------------------------------------------------------------------------------
 function new.Localization ()
     local file   = new.File("settings/lang.ini")
     local public = {}
@@ -7,7 +11,7 @@ function new.Localization ()
             localization = dofile("local/" .. code .. ".lua")
             file.write(code)
         elseif not localization then
-            setLocalization("en")
+            public.set ("en")
     end end
     
     public.init = function ()

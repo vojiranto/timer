@@ -1,3 +1,8 @@
+--------------------------------------------------------------------------------
+-- Name:            Mian                                                      --
+-- Dependencies:    Functions, File, Localization, TableOfWorkTime, Index,    --
+--                  ActiveTableOfWorkTime, Timer                              --
+--------------------------------------------------------------------------------
 function new.Main ()
     local private = {}
     private.localization    = new.Localization()

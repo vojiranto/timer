@@ -1,3 +1,7 @@
+--------------------------------------------------------------------------------
+-- Name:            Index                                                     --
+-- Dependencies:    Functions, File,                                          --
+--------------------------------------------------------------------------------
 function new.Index ()
     local indexPath = "tables/index.lua"
     local file = new.File(indexPath)

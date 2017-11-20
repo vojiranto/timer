@@ -15,7 +15,7 @@ end end
 new = {}
 dofiles {
     "functions",
-    "file",    
+    "file",
     "localization",
     "index",
     "tableOfWorkTime",
