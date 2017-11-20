@@ -9,3 +9,19 @@ List of supported commands:
     6. help            - show help;
     7. local en        - change the language (en/eo/ru);
     8. exit            - exit from the program.
+
+
+For install
+
+https://github.com/vojiranto/functions
+
+https://github.com/vojiranto/file
+
+For work you need to create something like this file structure.
+
+$ /libs/file
+
+$ /libs/functions
+
+$ /programs/timer
+
