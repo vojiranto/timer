@@ -6,7 +6,6 @@ line = [[
 -------------------------------------------------------------------------------
 ]]
 
-
 function new.TableOfWorkTime ()
     local private = {
         timeOfProgramStart = os.time(),

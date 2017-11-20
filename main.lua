@@ -1,11 +1,15 @@
 #!/usr/bin/luajit
 -------------------------------------------------------------------------------
 -- Name:        SCTR - Simple Console Time Registrator                       --
--- Version:     0.2.4.6                                                      --
+-- Version:     0.2.4.7                                                      --
 -- Author:      D.A. Pavlyuk                                                 --
 -- License:     GPL                                                          --
 -- Description: The program for the account of working hours.                --
 -------------------------------------------------------------------------------
+function dolibs(libs)
+    for _, fileName in pairs(libs) do
+        dofile("../../libs/" .. fileName .. "/main.lua")
+end end
 
 function dofiles (files)
     for _, fileName in pairs(files) do
@@ -13,9 +17,13 @@ function dofiles (files)
 end end
 
 new = {}
-dofiles {
+
+dolibs {
     "functions",
     "file",
+}
+
+dofiles {
     "localization",
     "index",
     "tableOfWorkTime",

@@ -10,7 +10,6 @@ local addZeroToNumber = function (n)
         return ""..n
 end end
 
-
 -- s => h:m:s
 local toNormalTimeFormat = function (n)
     local s = round(n%60)
@@ -19,13 +18,11 @@ local toNormalTimeFormat = function (n)
     return h..":"..addZeroToNumber(m)..":"..addZeroToNumber(s)
 end
 
-
 local printToConsoleAndInFile = function (string)
     local outString = os.date("%X") .. ": " .. string .. ".\n"
     io.write(outString)
     new.File("work_log.md").write(outString, "a")
 end
-
 
 function new.Timer (tableOfWorkTime)
     local private = {}
